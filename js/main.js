@@ -9,11 +9,14 @@ import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/l
 const scene = new THREE.Scene();
 //create a new camera with positions and angles
 const camera = new THREE.PerspectiveCamera(
-  75,
+  45,
   window.innerWidth / window.innerHeight,
   0.1,
   1000
 );
+camera.position.set(0, 1, 3); // Adjust camera position and orientation
+camera.lookAt(0, 0, 0);
+scene.add(camera);
 
 //Keep track of the mouse position, so we can make the eye move
 let mouseX = window.innerWidth / 2;
@@ -26,7 +29,7 @@ let object;
 let controls;
 
 //Set which object to render
-let objToRender = "fer";
+let objToRender = "dino";
 
 //Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
@@ -57,22 +60,17 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.z = objToRender === "fer" ? 25 : 500;
+camera.position.z = objToRender === "dino" ? 25 : 500;
 
 //Add lights to the scene, so we can actually see the 3D model
-const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
-topLight.position.set(500, 500, 500); //top-left-ish
-topLight.castShadow = true;
-scene.add(topLight);
+const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
+directionalLight.position.set(1, 1, 1); // Adjust light direction
+scene.add(directionalLight);
 
-const ambientLight = new THREE.AmbientLight(
-  0x333333,
-  objToRender === "fer" ? 5 : 1
-);
+const ambientLight = new THREE.AmbientLight(0x404040); // Soft ambient light
 scene.add(ambientLight);
-
 //This adds controls to the camera, so we can rotate / zoom it with the mouse
-if (objToRender === "fer") {
+if (objToRender === "dino") {
   controls = new OrbitControls(camera, renderer.domElement);
 }
 
