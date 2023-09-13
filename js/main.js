@@ -8,7 +8,12 @@ import { GLTFLoader } from "https://cdn.skypack.dev/three@0.129.0/examples/jsm/l
 //Create a Three.JS Scene
 const scene = new THREE.Scene();
 //create a new camera with positions and angles
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const camera = new THREE.PerspectiveCamera(
+  75,
+  window.innerWidth / window.innerHeight,
+  0.1,
+  1000
+);
 
 //Keep track of the mouse position, so we can make the eye move
 let mouseX = window.innerWidth / 2;
@@ -21,7 +26,7 @@ let object;
 let controls;
 
 //Set which object to render
-let objToRender = 'eye';
+let objToRender = "dino";
 
 //Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
@@ -36,7 +41,7 @@ loader.load(
   },
   function (xhr) {
     //While it is loading, log the progress
-    console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+    console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
   },
   function (error) {
     //If there is an error, log it
@@ -56,11 +61,14 @@ camera.position.z = objToRender === "dino" ? 25 : 500;
 
 //Add lights to the scene, so we can actually see the 3D model
 const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
-topLight.position.set(500, 500, 500) //top-left-ish
+topLight.position.set(500, 500, 500); //top-left-ish
 topLight.castShadow = true;
 scene.add(topLight);
 
-const ambientLight = new THREE.AmbientLight(0x333333, objToRender === "dino" ? 5 : 1);
+const ambientLight = new THREE.AmbientLight(
+  0x333333,
+  objToRender === "dino" ? 5 : 1
+);
 scene.add(ambientLight);
 
 //This adds controls to the camera, so we can rotate / zoom it with the mouse
@@ -75,9 +83,9 @@ function animate() {
 
   //Make the eye move
   if (object && objToRender === "eye") {
-    //I've played with the constants here until it looked good 
-    object.rotation.y = -3 + mouseX / window.innerWidth * 3;
-    object.rotation.x = -1.2 + mouseY * 2.5 / window.innerHeight;
+    //I've played with the constants here until it looked good
+    object.rotation.y = -3 + (mouseX / window.innerWidth) * 3;
+    object.rotation.x = -1.2 + (mouseY * 2.5) / window.innerHeight;
   }
   renderer.render(scene, camera);
 }
@@ -93,7 +101,7 @@ window.addEventListener("resize", function () {
 document.onmousemove = (e) => {
   mouseX = e.clientX;
   mouseY = e.clientY;
-}
+};
 
 //Start the 3D rendering
 animate();
