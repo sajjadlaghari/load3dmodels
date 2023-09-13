@@ -26,14 +26,14 @@ let object;
 let controls;
 
 //Set which object to render
-let objToRender = "dino";
+let objToRender = "fer";
 
 //Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
 
 //Load the file
 loader.load(
-  `models/${objToRender}/scene.gltf`,
+  `models/${objToRender}/scene.glb`,
   function (gltf) {
     //If the file is loaded, add it to the scene
     object = gltf.scene;
@@ -57,7 +57,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.z = objToRender === "dino" ? 25 : 500;
+camera.position.z = objToRender === "fer" ? 25 : 500;
 
 //Add lights to the scene, so we can actually see the 3D model
 const topLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
