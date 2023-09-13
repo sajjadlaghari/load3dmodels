@@ -29,7 +29,7 @@ let object;
 let controls;
 
 //Set which object to render
-let objToRender = "fer";
+let objToRender = "ch";
 
 //Instantiate a loader for the .gltf file
 const loader = new GLTFLoader();
@@ -60,7 +60,7 @@ renderer.setSize(window.innerWidth, window.innerHeight);
 document.getElementById("container3D").appendChild(renderer.domElement);
 
 //Set how far the camera will be from the 3D model
-camera.position.z = objToRender === "fer" ? 4 : 500;
+camera.position.z = objToRender === "ch" ? 4 : 500;
 
 //Add lights to the scene, so we can actually see the 3D model
 const directionalLight = new THREE.DirectionalLight(0xffffff, 1); // (color, intensity)
@@ -70,7 +70,7 @@ scene.add(directionalLight);
 const ambientLight = new THREE.AmbientLight(0x404040); // Soft ambient light
 scene.add(ambientLight);
 //This adds controls to the camera, so we can rotate / zoom it with the mouse
-if (objToRender === "fer") {
+if (objToRender === "ch") {
   controls = new OrbitControls(camera, renderer.domElement);
 }
 
